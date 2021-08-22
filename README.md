@@ -5,11 +5,11 @@ Despite modern technological innovation, the advent and value of artificial inte
 
 ## What it does and how to use it
 To make effective use of Byte Size ASL:
-  • Position your hand in the center of the webcam viewport.
-  • Ensure that your hand is well illuminated and that the background is clear.
-  • Above the webcam-viewport you will see the generated spelling-word. **The objective of Byte Size ASL is to recreate this spelling-word using the ASL alphabet.**
-  • Press the spacebar to take a picture of your hand. Byte Size ASL's state of the art convolutional neural network will evaluate this image based on 92,000 unique features to   determine which sign you are forming.
-  • If your input is correct, the letter will be added to the progress section, until you have completed the spelling-word.
+• Position your hand in the center of the webcam viewport.
+• Ensure that your hand is well illuminated and that the background is clear.
+• Above the webcam-viewport you will see the generated spelling-word. **The objective of Byte Size ASL is to recreate this spelling-word using the ASL alphabet.**
+• Press the spacebar to take a picture of your hand. Byte Size ASL's state of the art convolutional neural network will evaluate this image based on 92,000 unique features to   determine which sign you are forming.
+• If your input is correct, the letter will be added to the progress section, until you have completed the spelling-word.
 
 ## How we built it
 The convolutional neural network that powers Byte Size ASL was built using the Tensorflow and Keras libraries. To train the model, a data set containing 28x28 pixel gray-scale images was used. Data preparation involved one-hot encoding the labels, normalizing pixel values, and adding a color channel to pass the data through the convolutional layers.
