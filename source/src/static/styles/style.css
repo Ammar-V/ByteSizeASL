@@ -1,0 +1,185 @@
+html::-webkit-scrollbar-track {
+    background: black;
+
+}
+
+
+body {
+    background-color: #121212;
+    align-items: center;
+    margin: 0;
+    padding-right: 10px;
+
+}
+
+.main-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.heading {
+    margin-top: 0;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #FFFFFF;
+    font-size: 8rem;
+    margin-bottom: 20px;
+}
+
+.heading a {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #5C7CFF;
+    font-size: 8rem;
+    margin-bottom: 0;
+}
+
+.sub-heading {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
+    padding-bottom : 3vh
+}
+
+.word-to-spell {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #FFFFFF;
+    font-size: 3rem;
+    width : fit-content;
+    height: fit-content;
+    margin: auto;
+    padding-bottom: 3vh;
+    padding-top: 3vh;
+}
+
+.word-to-spell a {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #5C7CFF;
+    font-size: 3rem;
+    
+}
+
+.progress {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #FFFFFF;
+    font-size: 3rem;
+    width : fit-content;
+    height: fit-content;
+    margin: auto;
+    padding-bottom: 3vh;
+}
+
+.progress a {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #5C7CFF;
+    font-size: 3rem;
+}
+
+
+.video-wrapper {
+    display: flex;
+    justify-content: right;
+    margin-bottom: 3rem;
+}
+
+#videoElement {
+    border-color: #5C7CFF;
+    border-width: 0.5rem;
+    border-style: solid;
+}
+
+.control-label {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #FFFFFF;
+    font-size: 2em;
+    margin-bottom: 0;
+}
+
+.sub-control {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #FFFFFF;
+    font-size: 1rem;
+    font-weight: lighter;
+}
+
+.canvas-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+#canvas {
+    border-color: #FFFFFF;
+    border-width: 0.5rem;
+    border-style: solid;
+}
+
+#videoElement {
+    
+    max-width: 40vw;
+    height: auto;
+    margin: 0 3vw 0 5vw;
+}
+
+#canvas{
+    
+    margin: 10px 40px 10px 40px;
+}
+
+#current-prediction {
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#vid-section {
+    display: flex;
+    flex-direction: column;
+    
+    width: fit-content;
+    margin: auto;
+    border-right: 5px solid white;
+
+}    
+
+.troubleshooting-heading {
+    color: #FFFFFF;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 4rem;
+    width: fit-content;
+    padding-top: 4vh;
+    margin: auto
+}
+
+#main {
+    display: flex;
+}
+
+#display {
+    display: flex;
+    flex-direction: column;
+    margin: 10px
+}
+
+#trouble-list {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    width: fit-content;
+    margin: auto;
+}
+
+#trouble-list li {
+    margin-top: 1em;
+}
+
+footer {
+    height: 10vh; 
+}

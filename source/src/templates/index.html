@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://image.flaticon.com/icons/png/512/1141/1141072.png">
+    <title>Byte Size ASL</title>
+    <html lang="en">
+
+        <header>
+            <meta charset="UTF-8">
+            <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}" type="text/css">
+            <title></title>
+        </header>
+    
+        <body onload="init();">
+            <div class="main_wrapper">
+                <h1 class = "heading">B<a>y</a>te Size ASL</h1>
+                <h2 class = "sub-heading">Powering education with deep learning.</h2>
+                <div id="main">
+                    <div id = "vid-section">
+                        
+                        <h2 class = "word-to-spell" id = "word-to-spell">Spell: <a id = 'word'>{{word}}</a></h2>
+                        <h2 class = "progress" id = "progress">Progress: <a id="progress-word"></a></h2>
+                        <div class="video-wrapper">
+                            <video id="videoElement" autoplay="true" onclick="capture_frame();"></video>
+                        </div>
+                        
+                    </div>
+                    <div id="display">
+                        <h2 class = "control-label">Press the spacebar to take photos of your signs!</h2>
+                        <h3 class = "sub-control">They'll appear below as you take them.</h3>
+                        <div class="canvas-wrapper">
+                            <canvas  id="canvas"></canvas>
+                        </div>
+                        <h2 class = "current-prediction" id = "current-prediction" style="font-size: 2rem">Your Letter:</h2>
+                    </div>
+                </div>
+                
+                <h2 class = "troubleshooting-heading">Troubleshooting 🛠️</h2>
+                <ul id="trouble-list">
+                    <li>Ensure there is light illuminating your hand.</li>
+                    <li>Take pictures against a blank, light-coloured background.</li>
+                    <li>Center your hand in the frame.</li>
+                    <li>Experiment with how much of your wrist is in the frame.</li>
+                </ul>
+    
+                <footer> </footer>
+                
+                
+            </div>
+    
+            <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    
+            <script>
+    
+                let video = document.querySelector("#videoElement");
+    
+                // Connecting to the user webcam
+                if(navigator.mediaDevices.getUserMedia != null){
+    
+                    navigator.mediaDevices.getUserMedia({
+                        video: true,
+                        audio: false
+                    })
+                    .then( stream => {
+                        video.srcObject = stream;
+                    })
+    
+                }
+    
+                let canvas, context;
+    
+                function init(){
+                    // initializing the canvas and its context
+                    canvas = document.getElementById("canvas");
+                    context = canvas.getContext('2d');
+    
+                }
+    
+                function capture_frame() {
+                    context.drawImage(video, 0,0, canvas.width, canvas.height); // draws the current frame onto the canvas
+                    let dataURL = canvas.toDataURL(); // get the data from the frame
+                    let spellingWord = document.getElementById("word").textContent;
+                    let progressWord = document.getElementById("progress-word").textContent;
+                    
+                    let count = progressWord.length
+    
+                    // formatted POST request sent to flask server containing the image data
+                    $.ajax({
+                        type: "POST",
+                        url: "{{url_for('home')}}",
+                        contentType: 'application/json;charset=UTF-8',
+                        success : (result) => {
+                            result =  result.toLowerCase();
+                            document.getElementById("current-prediction").innerHTML = "Your Letter: " + result.toString();
+                            if(result.toString() === spellingWord.charAt(count)) {
+    
+                                //Changing color to show if correct or not
+                                document.getElementById("current-prediction").style.color = "green";
+                                
+                                //Update the progress word
+                                progressWord += result.toString();
+                                document.getElementById("progress-word").textContent = progressWord;
+    
+                                //Updating currect char index
+                                count++;
+                                //console.log(count)
+                                //console.log('word: ' + spellingWord.length)
+                                //Check if whole word is spelled out
+                            } else if (result.toString() != spellingWord.charAt(count) ){
+                                document.getElementById("current-prediction").style.color = "red";
+                                //console.log('red');
+                            }
+                        },
+                        data: JSON.stringify({
+                            imageBase64: dataURL,
+                            /*'spellingWord': spellingWord,
+                            'progressWord': progressWord*/
+                        },)
+                    });
+    
+                    //resets count and adds a new word
+                    if (count === spellingWord.length - 1) {
+                        count = 0
+    
+                        
+    
+                        //Get new word
+                        let word = ""
+                        
+    
+                        //API request to add a new word
+                        $.ajax({
+                            type: "POST",
+                            url: "{{url_for('home')}}",
+                            contentType: 'application/json;charset=UTF-8',
+                            success: (result) => {
+                                word = result;
+                                
+                                spellingWorld = word;
+                                document.getElementById("word").textContent = word;
+                        
+                                //Reset progress
+                                document.getElementById("progress-word").textContent = "";
+    
+                                
+                            },
+                            data: JSON.stringify({
+                                
+                            })
+    
+                        });
+                            
+                        //Reset Your Letter
+                        document.getElementById("current-prediction").style.color = "white";
+                        //console.log('white')
+                        document.getElementById("current-prediction").innerHTML = "Your Letter: "
+                        
+                    }
+                    
+                }
+    
+                document.addEventListener('keyup', (event) => {
+                    if (event.code === 'Space' && event.target == document.body) {
+                        capture_frame();
+                    }
+                })
+    
+                document.addEventListener('keydown', (event) => {
+                    if(event.code === 'Space' && event.target == document.body) {
+                        event.preventDefault();
+                    }
+                })
+    
+            </script>
+    
+        </body>
+    
+    </html>
+
+<!DOCTYPE html>
+
