@@ -128,7 +128,8 @@ body {
 }
 
 #canvas{
-    
+    width: auto;
+    height: auto;
     margin: 10px 40px 10px 40px;
 }
 
