@@ -2,3 +2,4 @@ pics/
 README.md
 source/src/SignMNIST.py
 source/src/venv/
+source/src/__pycache__/
