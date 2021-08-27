@@ -1,4 +1,4 @@
-from tensorflow import keras
+import keras
 import numpy as np
 from numpy import asarray
 import PIL
