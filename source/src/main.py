@@ -24,4 +24,4 @@ def home():
     return render_template('index.html', word=wordSource.get_random_word())
 
 if __name__ == "__main__":
-    app.run(debug = True, host = '0.0.0.0')
+    app.run(debug = True, host = '0.0.0.0') 
